@@ -1,23 +1,6 @@
 import { Card, CardActions, CardContent, Link, Stack, Typography } from "@mui/material";
 
-export const getStaticPaths = async () => {
-
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const json = await response.json();
-
-    const paths = json.map((user) => {
-        return {
-            params: { id: user.id.toString() }
-        }
-    })
-
-    return {
-        paths,
-        fallback: false
-    }
-}
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
     const id = context.params.id;
 
     const response = await fetch("https://jsonplaceholder.typicode.com/users/" + id);
@@ -49,7 +32,7 @@ function Details({ user }) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Link href={"/nested"}>Go to Users</Link>
+                    <Link href={"/server-side"}>Go to server-side users</Link>
                 </CardActions>
             </Card>
         </Stack>

@@ -21,7 +21,9 @@ export default function Home() {
           height={38}
           priority
         />
-        <Link href={"/nested"}>Go to Users</Link>
+        <br />
+        <Link href={"/static"}>Go to static users</Link>
+        <Link href={"/server-side"}>Go to server side</Link>
       </div>
     </>
   );

@@ -12,13 +12,13 @@ export const getStaticProps = async () => {
     }
 }
 
-function Nested({ users }) {
-    console.log('users in nested :', users);
+function Static({ users }) {
+    console.log('users in static : ', new Date(), " - ", users);
 
     return (
         <List>
             {users && users.map((user, inx) => {
-                return <Link key={inx} href={`/nested/${user.id}`}>
+                return <Link key={inx} href={`/static/${user.id}`}>
                     <ListItem  disablePadding >
                         <ListItemButton>
                             <ListItemText  primary={user.name} />
@@ -30,4 +30,4 @@ function Nested({ users }) {
     )
 }
 
-export default Nested;
+export default Static;

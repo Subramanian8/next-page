@@ -17,7 +17,9 @@ function Navbar() {
             <Stack spacing={2} direction={"row"}>
                 <Link href={"/"}>Home</Link>
                 <Link href={"/about"}>About</Link>
-                <Link href={"/nested/contact"}>Contact</Link>
+                <Link href={"/static"}>Static</Link>
+                <Link href={"/server-side"}>Server-side</Link>
+                <Link href={"/contact"}>Contact</Link>
             </Stack>
         </StyledToolbar>
     </AppBar>
