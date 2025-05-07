@@ -26,8 +26,12 @@ function Static({ users }) {
                 {users && users.map((user, inx) => {
                     return <ListItem key={inx} disablePadding >
                         <ListItemButton>
-                            <Link href={`/static/${user.email}`}>
-                                <ListItemText primary={user.email} />
+                            <Link href={`/static/${user.email}-details`}>
+                                <ListItemText primary="Details" secondary={user.email} />
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Link href={`/static/${user.email}-posts`}>
+                                <ListItemText primary="Posts" secondary={user.email} />
                             </Link>
                         </ListItemButton>
                     </ListItem >
