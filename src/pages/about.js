@@ -6,6 +6,7 @@ function About() {
     return <>
         <Head>
             <title>Next | About</title>
+            <meta property="og:title" content="Next about page title" key="title" />
         </Head>
         <Stack spacing={5} mt={10} mb={20}>
             <Typography>

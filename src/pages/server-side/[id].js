@@ -1,5 +1,7 @@
 import { Card, CardActions, CardContent, Link, Stack, Typography } from "@mui/material";
 
+import Head from "next/head";
+
 export const getServerSideProps = async (context) => {
     const id = context.params.id;
 
@@ -12,10 +14,14 @@ export const getServerSideProps = async (context) => {
 }
 
 function Details({ user }) {
-    console.log('user :', user);
+    // console.log('server-side user :', user);
 
     return <>
         <Stack>
+            <Head>
+                <title>Next | Server-side Page | {user.name}</title>
+                <meta property="og:title" content={`Next server-side page title | ${user.name}`} key="title" />
+            </Head>
             <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>

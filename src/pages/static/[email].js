@@ -1,13 +1,19 @@
 import { Card, CardActions, CardContent, Link, Stack, Typography } from "@mui/material";
 
+import Head from "next/head";
+
 export const getStaticPaths = async () => {
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const response = await fetch("https://jsonplaceholder.typicode.com/comments");
     const json = await response.json();
+    // console.log('getStaticPaths json :', json);
 
     const paths = json.map((user) => {
         return {
-            params: { id: user.id.toString() }
+            params: {
+                email: user.email.toString(),
+                details: user.email.toString() + "-details", posts: user.email.toString() + "-posts"
+            }
         }
     })
 
@@ -18,21 +24,26 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-    const id = context.params.id;
+    const email = context.params.email;
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/users/" + id);
+    const response = await fetch("https://jsonplaceholder.typicode.com/comments?email=" + email);
     const json = await response.json();
+    // console.log('getStaticProps json :', json);
 
     return {
         props: { user: json }
     }
 }
 
-function Details({ user }) {
-    console.log('user :', user);
+function StaticDetails(props) {
+    const user = props.user[0];
 
     return <>
         <Stack>
+            <Head>
+                <title>Next | Static Page | {user.name}</title>
+                <meta property="og:title" content={`Next static page title | ${user.name}`} key="title" />
+            </Head>
             <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
@@ -42,11 +53,11 @@ function Details({ user }) {
                         {user.email}
                     </Typography>
                     <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-                        {user.phone}
+                        {user.body}
                     </Typography>
-                    <Typography variant="body2">
+                    {/* <Typography variant="body2">
                         {user.website}
-                    </Typography>
+                    </Typography> */}
                 </CardContent>
                 <CardActions>
                     <Link href={"/static"}>Go to static users</Link>
@@ -56,4 +67,4 @@ function Details({ user }) {
     </>
 }
 
-export default Details;
+export default StaticDetails;

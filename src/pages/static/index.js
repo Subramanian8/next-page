@@ -1,10 +1,11 @@
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 
+import Head from "next/head";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/users#");
+    const response = await fetch("https://jsonplaceholder.typicode.com/comments");
     const json = await response.json();
 
     return {
@@ -13,20 +14,26 @@ export const getStaticProps = async () => {
 }
 
 function Static({ users }) {
-    console.log('users in static : ', new Date(), " - ", users);
+    console.log('static users list : ', new Date(), " - ", users);
 
     return (
-        <List>
-            {users && users.map((user, inx) => {
-                return <Link key={inx} href={`/static/${user.id}`}>
-                    <ListItem  disablePadding >
+        <>
+            <Head>
+                <title>Next | Static Page</title>
+                <meta property="og:title" content="Next static page title" key="title" />
+            </Head>
+            <List>
+                {users && users.map((user, inx) => {
+                    return <ListItem key={inx} disablePadding >
                         <ListItemButton>
-                            <ListItemText  primary={user.name} />
+                            <Link href={`/static/${user.email}`}>
+                                <ListItemText primary={user.email} />
+                            </Link>
                         </ListItemButton>
                     </ListItem >
-                </Link>
-            })}
-        </List>
+                })}
+            </List>
+        </>
     )
 }
 
