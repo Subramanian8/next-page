@@ -14,7 +14,7 @@ export const getStaticProps = async () => {
 }
 
 function Static({ users }) {
-    console.log('static users list : ', new Date(), " - ", users);
+    // console.log('static users list : ', new Date(), " - ", users);
 
     return (
         <>
